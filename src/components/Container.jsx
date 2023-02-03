@@ -1,7 +1,24 @@
-import React from 'react'
-import { CardContainer } from './CardContainer.jsx'
+import React, { useState } from 'react'
+import { CardContainer } from './CardDetails.jsx'
+import { fetchData } from './../helpers/fetchData'
 
-export function Container ({ firstName, lastName, employment, username, avatar, handleCLick }) {
+export function Container () {
+  const [avatar, setAvatar] = useState()
+  const [username, setUsername] = useState()
+  const [firstName, setFirstName] = useState()
+  const [lastName, setLastName] = useState()
+  const [employment, setEmployment] = useState()
+
+  const handleCLick = () => {
+    fetchData().then(resp => {
+      setAvatar(resp.avatar)
+      setUsername(resp.username)
+      setEmployment(resp.employment.title)
+      setFirstName(resp.first_name)
+      setLastName(resp.last_name)
+    })
+  }
+
   return (
     <main className='container'>
       <CardContainer
