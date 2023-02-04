@@ -1,11 +1,16 @@
-export function CardContainer ({ firstName, lastName, employment, username, avatar }) {
+import { useContext } from 'react'
+import { ContextData } from './Container'
+
+export function CardDetails () {
+  const dataAux = useContext(ContextData)
+  if (dataAux === null) return null
   return (
-    <section className='cardContainer'>
-      <img src={avatar && avatar} alt='User avatar' />
+    <section className='cardDetails'>
+      <img src={dataAux.avatar && dataAux.avatar} alt='User avatar' />
       <section className='details'>
-        <h2>{firstName && firstName} {lastName && lastName}</h2>
-        <h3>{employment && employment}</h3>
-        <h4>{username && `@${username}`}</h4>
+        <h2>{dataAux.first_name && dataAux.first_name} {dataAux.last_name && dataAux.last_name}</h2>
+        <h3>{dataAux.employment.title && dataAux.employment.title}</h3>
+        <h4>{dataAux.username && `@${dataAux.username}`}</h4>
       </section>
     </section>
   )
